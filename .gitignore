@@ -1,24 +1,22 @@
 # Virtual environments
 venv/
 env/
-.env
+.venv/
 
 # Node modules
 node_modules/
+frontend/node_modules/
 
 # Python cache
 __pycache__/
-*.py[cod]
+*.pyc
+*.pyo
+*.pyd
 
-# OS generated files
-.DS_Store
-Thumbs.db
+# Environments
+.env
+.env.local
 
-# Build and dist
-dist/
-build/
-*.egg-info/
-
-# IDE files
-.vscode/
+# IDEs
 .idea/
+.vscode/
