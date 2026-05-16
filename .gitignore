@@ -1,0 +1,24 @@
+# Virtual environments
+venv/
+env/
+.env
+
+# Node modules
+node_modules/
+
+# Python cache
+__pycache__/
+*.py[cod]
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Build and dist
+dist/
+build/
+*.egg-info/
+
+# IDE files
+.vscode/
+.idea/
