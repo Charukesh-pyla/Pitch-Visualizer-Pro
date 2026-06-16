@@ -5,69 +5,305 @@
 }
 
 @utility glass {
-  background-color: rgba(255, 255, 255, 0.05);
+  background-color: rgba(255, 255, 255, 0.03);
   backdrop-filter: blur(24px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.2), 0 10px 10px -5px rgba(0, 0, 0, 0.1);
 }
 
 @utility glass-panel {
-  background-color: rgba(15, 23, 42, 0.6);
-  backdrop-filter: blur(12px);
-  border: 1px solid rgba(51, 65, 85, 0.5);
-  border-radius: 1rem;
+  background-color: rgba(13, 17, 28, 0.7);
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 1.25rem;
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
 }
 
 /* Custom Scrollbar for better aesthetics */
 ::-webkit-scrollbar {
   width: 8px;
+  height: 8px;
 }
 ::-webkit-scrollbar-track {
-  background: transparent;
+  background: rgba(15, 23, 42, 0.3);
 }
 ::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.1);
-  border-radius: 4px;
+  background: rgba(139, 92, 246, 0.3); /* Purple-500/30 */
+  border-radius: 9999px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(255, 255, 255, 0.2);
+  background: rgba(139, 92, 246, 0.6); /* Purple-500/60 */
 }
 
-/* Loader Animation */
+/* Glow effects */
+.glow-card {
+  position: relative;
+}
+.glow-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1.5px; /* Border thickness */
+  background: linear-gradient(to bottom right, rgba(168, 85, 247, 0.4), rgba(59, 130, 246, 0.2), transparent);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+  transition: opacity 0.5s ease;
+  opacity: 0.5;
+}
+.glow-card:hover::before {
+  opacity: 1;
+}
+
+/* Custom visual style cards */
+.style-card {
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+.style-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(168, 85, 247, 0.4);
+  background: rgba(168, 85, 247, 0.04);
+  box-shadow: 0 10px 20px -10px rgba(168, 85, 247, 0.3);
+}
+.style-card.active {
+  border-color: #a855f7; /* purple-500 */
+  background: rgba(168, 85, 247, 0.1);
+  box-shadow: 0 0 20px rgba(168, 85, 247, 0.25);
+}
+.style-card.active::after {
+  content: "✓";
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  background: #a855f7;
+  color: white;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;
+  font-weight: bold;
+}
+
+/* Template buttons */
+.template-btn {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 9999px;
+  padding: 6px 14px;
+  font-size: 0.825rem;
+  color: #94a3b8; /* slate-400 */
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+.template-btn:hover {
+  background: rgba(168, 85, 247, 0.1);
+  border-color: rgba(168, 85, 247, 0.3);
+  color: #f1f5f9; /* slate-100 */
+}
+
+/* Loader Wave Animation */
 .loader-wave {
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 4px;
+  gap: 6px;
 }
 .loader-wave span {
   display: block;
-  width: 6px;
-  height: 20px;
-  background: #a855f7; /* purple-500 */
+  width: 5px;
+  height: 24px;
+  background: linear-gradient(135deg, #a855f7, #3b82f6);
   border-radius: 3px;
-  animation: wave 1s infinite ease-in-out;
+  animation: wave 1.2s infinite ease-in-out;
 }
-.loader-wave span:nth-child(2) { animation-delay: 0.1s; }
-.loader-wave span:nth-child(3) { animation-delay: 0.2s; }
-.loader-wave span:nth-child(4) { animation-delay: 0.3s; }
-.loader-wave span:nth-child(5) { animation-delay: 0.4s; }
+.loader-wave span:nth-child(2) { animation-delay: 0.15s; }
+.loader-wave span:nth-child(3) { animation-delay: 0.3s; }
+.loader-wave span:nth-child(4) { animation-delay: 0.45s; }
+.loader-wave span:nth-child(5) { animation-delay: 0.6s; }
 
 @keyframes wave {
-  0%, 100% { transform: scaleY(0.5); opacity: 0.5; }
-  50% { transform: scaleY(1.5); opacity: 1; }
+  0%, 100% { transform: scaleY(0.4); opacity: 0.3; }
+  50% { transform: scaleY(1.4); opacity: 1; }
 }
 
-/* Storyboard transition */
+/* Micro-animations */
 .fade-in-up {
-  animation: fadeInUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation: fadeInUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
   opacity: 0;
-  transform: translateY(20px);
+  transform: translateY(16px);
 }
-
 @keyframes fadeInUp {
   to {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+
+/* Collapsible prompt styling */
+.prompt-accordion {
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+.prompt-trigger {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  user-select: none;
+}
+.prompt-content {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.prompt-content.open {
+  max-height: 200px;
+}
+
+/* Print and PDF generation styles */
+@media print {
+  /* Hide all interactive components, headers, forms, and sidebars */
+  .no-print, 
+  aside, 
+  nav, 
+  header, 
+  #empty-state, 
+  #loading-state, 
+  #pitch-form, 
+  #download-pdf-btn,
+  #storyboard-wrapper > div:first-child,
+  .template-btn {
+    display: none !important;
+  }
+  
+  /* Reset backgrounds and colors for printing */
+  body, 
+  main, 
+  #app {
+    background: #ffffff !important;
+    color: #0f172a !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    box-shadow: none !important;
+  }
+
+  main {
+    display: block !important;
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+
+  /* Make storyboard wrapper occupy full page */
+  #storyboard-wrapper {
+    display: block !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  #storyboard-container {
+    display: block !important;
+    width: 100% !important;
+  }
+
+  /* Format each scene card into a clean landscape flex-row print card */
+  .glass-panel {
+    background: #f8fafc !important;
+    color: #0f172a !important;
+    border: 1px solid #cbd5e1 !important;
+    box-shadow: none !important;
+    margin-bottom: 2.5rem !important;
+    display: flex !important;
+    flex-direction: row !important; /* Force horizontal side-by-side */
+    border-radius: 12px !important;
+    overflow: hidden !important;
+    page-break-inside: avoid !important;
+    height: 350px !important;
+  }
+  
+  /* Left visual image side */
+  .glass-panel > div:first-child {
+    width: 55% !important;
+    height: 100% !important;
+    position: relative !important;
+    display: block !important;
+    background: #0f172a !important;
+  }
+  
+  .glass-panel img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+  }
+
+  /* Right textual content side */
+  .glass-panel > div:last-child {
+    width: 45% !important;
+    padding: 24px !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: center !important;
+    background: #ffffff !important;
+    border-left: 1px solid #cbd5e1 !important;
+  }
+
+  /* Role/Stage Badge */
+  .glass-panel .inline-block {
+    background: #f1f5f9 !important;
+    color: #6d28d9 !important; /* purple-700 */
+    border: 1px solid #cbd5e1 !important;
+    font-size: 9px !important;
+    font-weight: bold !important;
+    padding: 2px 8px !important;
+  }
+
+  /* Story Description Text */
+  .glass-panel h3 {
+    color: #0f172a !important;
+    font-size: 15px !important;
+    margin-top: 8px !important;
+    line-height: 1.4 !important;
+  }
+
+  /* Prompt spec section: hide toggle, reveal full text */
+  .prompt-accordion {
+    border-top: 1px dashed #cbd5e1 !important;
+    margin-top: 15px !important;
+    padding-top: 10px !important;
+  }
+
+  .prompt-trigger {
+    display: none !important; /* Hide chevron trigger */
+  }
+
+  .prompt-content {
+    max-height: none !important;
+    display: block !important;
+    overflow: visible !important;
+    opacity: 1 !important;
+  }
+
+  .prompt-content p {
+    background: #f8fafc !important;
+    color: #475569 !important;
+    border: 1px solid #e2e8f0 !important;
+    padding: 8px !important;
+    font-size: 9px !important;
+    font-family: monospace !important;
+    line-height: 1.3 !important;
+    white-space: pre-wrap !important;
+  }
+
+  /* Hide copy buttons in print */
+  .prompt-content p button {
+    display: none !important;
   }
 }
